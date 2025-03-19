@@ -19,13 +19,13 @@ st.markdown("""
     .main-header {
         font-size: 3rem !important;
         font-weight: 700;
-        color: #1E3A8A;
+        color: #000000;
         text-align: center;
         margin-bottom: 2rem;
     }
     .sub-header {
         font-size: 1.5rem;
-        color: #4B5563;
+        color: #000000;
         text-align: center;
         margin-bottom: 3rem;
     }
@@ -34,17 +34,18 @@ st.markdown("""
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 20px;
         transition: transform 0.3s;
+        color: #000000;
     }
     .card:hover {
         transform: translateY(-5px);
     }
     .card-cancer {
-        background-color: #FEF2F2;
-        border-left: 5px solid #DC2626;
+        background-color: #F3F4F6;
+        border-left: 5px solid #374151;
     }
     .card-mental {
-        background-color: #EFF6FF;
-        border-left: 5px solid #2563EB;
+        background-color: #F3F4F6;
+        border-left: 5px solid #374151;
     }
     .center-content {
         display: flex;
@@ -52,12 +53,14 @@ st.markdown("""
         align-items: center;
         justify-content: center;
         height: 100%;
+        color: #000000;
     }
     .result-container {
         margin-top: 2rem;
         padding: 1.5rem;
         border-radius: 10px;
         background-color: #F3F4F6;
+        color: #000000;
     }
     .footer {
         position: fixed;
@@ -68,7 +71,21 @@ st.markdown("""
         padding: 1rem;
         background-color: #F9FAFB;
         font-size: 0.8rem;
-        color: #6B7280;
+        color: #000000;
+    }
+    .stButton button {
+        background-color: #374151;
+        color: white;
+    }
+    .stButton button:hover {
+        background-color: #111827;
+    }
+    /* Change all text to black */
+    p, h1, h2, h3, h4, h5, h6, div, span, label {
+        color: #000000;
+    }
+    .stSlider label, .stFileUploader label {
+        color: #000000 !important;
     }
 </style>
 """, unsafe_allow_html=True)
@@ -77,8 +94,8 @@ st.markdown("""
 st.markdown("<h1 class='main-header'>Health Analysis Portal</h1>", unsafe_allow_html=True)
 st.markdown("<p class='sub-header'>Early detection saves lives. Choose an analysis option below.</p>", unsafe_allow_html=True)
 
-# Function for breast cancer detection
-def process_cancer_image(image):
+# Function for lung cancer detection
+def process_lung_image(image):
     # This would contain the actual image processing and model prediction code
     # For demonstration, we'll simulate processing time and return a result
     progress_bar = st.progress(0)
@@ -96,10 +113,11 @@ def process_cancer_image(image):
     
     # Simulated result
     result = {
-        "prediction": "Benign",
-        "confidence": 0.89,
-        "region_of_interest": "Upper quadrant",
-        "recommendations": "Regular follow-up recommended in 6 months."
+        "prediction": "Suspicious nodule detected",
+        "confidence": 0.87,
+        "nodule_size": "8mm",
+        "location": "Right upper lobe",
+        "recommendations": "Follow-up CT scan recommended in 3 months. Consult with pulmonologist."
     }
     return result
 
@@ -139,18 +157,18 @@ def main():
     # Create two columns for the buttons
     col1, col2 = st.columns(2)
     
-    # Breast Cancer Detection Card
+    # Lung Cancer Detection Card
     with col1:
         st.markdown("""
         <div class="card card-cancer">
             <div class="center-content">
-                <h2>Breast Cancer Detection</h2>
-                <p>Upload a mammogram image for analysis using our AI-powered detection system.</p>
+                <h2>Lung Cancer Detection</h2>
+                <p>Upload a chest CT scan or X-ray image for analysis using our AI-powered detection system.</p>
             </div>
         </div>
         """, unsafe_allow_html=True)
         
-        uploaded_file = st.file_uploader("Upload mammogram image", type=["jpg", "jpeg", "png"], key="cancer_uploader")
+        uploaded_file = st.file_uploader("Upload lung scan image", type=["jpg", "jpeg", "png", "dcm"], key="cancer_uploader")
         
         if uploaded_file is not None:
             image = Image.open(uploaded_file)
@@ -158,13 +176,14 @@ def main():
             
             if st.button("Analyze Image", key="cancer_button"):
                 with st.spinner("Processing image..."):
-                    result = process_cancer_image(image)
+                    result = process_lung_image(image)
                 
                 st.markdown("<div class='result-container'>", unsafe_allow_html=True)
                 st.subheader("Analysis Results")
                 st.write(f"**Classification:** {result['prediction']}")
                 st.write(f"**Confidence Score:** {result['confidence']*100:.1f}%")
-                st.write(f"**Region of Interest:** {result['region_of_interest']}")
+                st.write(f"**Nodule Size:** {result['nodule_size']}")
+                st.write(f"**Location:** {result['location']}")
                 st.write("**Recommendations:**")
                 st.write(result['recommendations'])
                 st.markdown("</div>", unsafe_allow_html=True)
@@ -209,7 +228,7 @@ def main():
                 st.markdown("<div class='result-container'>", unsafe_allow_html=True)
                 st.subheader("Assessment Results")
                 
-                # Visual indicator of status
+                # Visual indicator of status (with black text)
                 if result["status"] == "Low concern":
                     st.success(f"Status: {result['status']}")
                 elif result["status"] == "Moderate concern":
@@ -222,8 +241,7 @@ def main():
                 st.write(result['recommendations'])
                 st.markdown("</div>", unsafe_allow_html=True)
                 
-    
-    # Footer
+
 
 if __name__ == "__main__":
     main()
