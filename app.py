@@ -34,6 +34,7 @@ st.markdown("""
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 20px;
         transition: transform 0.3s;
+        color: #000000; /* Explicit text color */
     }
     .card:hover {
         transform: translateY(-5px);
@@ -59,7 +60,12 @@ st.markdown("""
         border-radius: 10px;
         background-color: #F3F4F6;
     }
-
+    .card h2 {
+        color: #000000; /* Explicit text color for headers */
+    }
+    .card p {
+        color: #000000; /* Explicit text color for paragraphs */
+    }
 </style>
 """, unsafe_allow_html=True)
 
