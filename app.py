@@ -19,13 +19,13 @@ st.markdown("""
     .main-header {
         font-size: 3rem !important;
         font-weight: 700;
-        color: #000000;
+        color: #1E3A8A;
         text-align: center;
         margin-bottom: 2rem;
     }
     .sub-header {
         font-size: 1.5rem;
-        color: #000000;
+        color: #4B5563;
         text-align: center;
         margin-bottom: 3rem;
     }
@@ -34,18 +34,17 @@ st.markdown("""
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         padding: 20px;
         transition: transform 0.3s;
-        color: #000000;
     }
     .card:hover {
         transform: translateY(-5px);
     }
     .card-cancer {
-        background-color: #F3F4F6;
-        border-left: 5px solid #374151;
+        background-color: #FEF2F2;
+        border-left: 5px solid #DC2626;
     }
     .card-mental {
-        background-color: #F3F4F6;
-        border-left: 5px solid #374151;
+        background-color: #EFF6FF;
+        border-left: 5px solid #2563EB;
     }
     .center-content {
         display: flex;
@@ -53,40 +52,14 @@ st.markdown("""
         align-items: center;
         justify-content: center;
         height: 100%;
-        color: #000000;
     }
     .result-container {
         margin-top: 2rem;
         padding: 1.5rem;
         border-radius: 10px;
         background-color: #F3F4F6;
-        color: #000000;
     }
-    .footer {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        text-align: center;
-        padding: 1rem;
-        background-color: #F9FAFB;
-        font-size: 0.8rem;
-        color: #000000;
-    }
-    .stButton button {
-        background-color: #374151;
-        color: white;
-    }
-    .stButton button:hover {
-        background-color: #111827;
-    }
-    /* Change all text to black */
-    p, h1, h2, h3, h4, h5, h6, div, span, label {
-        color: #000000;
-    }
-    .stSlider label, .stFileUploader label {
-        color: #000000 !important;
-    }
+
 </style>
 """, unsafe_allow_html=True)
 
