@@ -222,10 +222,8 @@ def main():
                 st.write(result['recommendations'])
                 st.markdown("</div>", unsafe_allow_html=True)
                 
-                st.warning("⚠️ This tool is not a diagnostic instrument. Please consult a mental health professional for proper evaluation.")
     
     # Footer
-    st.markdown("<div class='footer'>This application is for educational purposes only. Not intended for medical diagnosis.</div>", unsafe_allow_html=True)
 
 if __name__ == "__main__":
     main()
