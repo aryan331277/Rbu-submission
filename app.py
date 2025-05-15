@@ -34,7 +34,7 @@ if uploaded_file is not None:
     #st.success(f"✅ '1.edf' uploaded successfully.", icon="")
 
     # Show file details
-    st.subheader("File Details")
+    #st.subheader("File Details")
 
     
     # Fake prediction section
