@@ -5,7 +5,7 @@ import pandas as pd
 import os
 
 # --- PAGE CONFIG ---
-st.set_page_config(page_title="🧠 EEG-to-Word Decoder (Demo)", layout="wide")
+st.set_page_config(page_title=" EEG-to-Word Decoder (Demo)", layout="wide")
 
 # --- HEADER ---
 st.title("🧠 EEG-to-Word Decoder – v1 Demo")
@@ -19,7 +19,7 @@ with st.sidebar:
     - Built by Aryan  
     - Part of Project 16/52  
     """)
-    image_file = st.file_uploader("🧠 Upload a brainwave image (optional)", type=["png", "jpg", "jpeg"])
+    image_file = st.file_uploader("Upload a brainwave image (optional)", type=["png", "jpg", "jpeg"])
 
     if image_file is not None:
         st.image(image_file, use_column_width=True)
@@ -28,17 +28,17 @@ with st.sidebar:
         st.info("You can optionally upload a brainwave image to show in the sidebar.")
 
 # --- FILE UPLOADER ---
-uploaded_file = st.file_uploader("📁 Upload an EEG file (.edf / .npy / anything)", type=["edf", "npy", "csv", "npy"])
+uploaded_file = st.file_uploader("Upload an EEG file (.edf / .npy / anything)", type=["edf", "npy", "csv", "npy"])
 
 if uploaded_file is not None:
-    st.success(f"✅ '{uploaded_file.name}' uploaded successfully.", icon="🧠")
+    st.success(f"✅ '1.edf' uploaded successfully.", icon="")
 
     # Show file details
-    st.subheader("📄 File Details")
+    st.subheader("File Details")
 
     
     # Fake prediction section
-    st.markdown("### 🧠 Decoded Word:")
+    st.markdown("### Decoded Word:")
     st.markdown("### scooter")
     
     # Add fake waveform visualization
