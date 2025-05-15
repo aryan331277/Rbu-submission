@@ -18,8 +18,6 @@ with st.sidebar:
     st.markdown("""
     - Built by Aryan  
     - Part of Project 16/52  
-    - Solo, first-year, self-taught  
-    - Coming soon: Real CNN-based decoding from raw EEG signals  
     """)
     image_file = st.file_uploader("🧠 Upload a brainwave image (optional)", type=["png", "jpg", "jpeg"])
 
@@ -28,7 +26,6 @@ with st.sidebar:
         st.caption("User-provided brainwave image.")
     else:
         st.info("You can optionally upload a brainwave image to show in the sidebar.")
-        st.caption("Fake visualization shown for demo purposes.")
 
 # --- FILE UPLOADER ---
 uploaded_file = st.file_uploader("📁 Upload an EEG file (.edf / .npy / anything)", type=["edf", "npy", "csv", "npy"])
@@ -38,17 +35,16 @@ if uploaded_file is not None:
 
     # Show file details
     st.subheader("📄 File Details")
-    st.write(f"**Type:** {os.path.splitext(uploaded_file.name)[-1]}")
-    st.write(f"**Size:** {round(len(uploaded_file.getvalue()) / 1024, 2)} KB")
+
     
     # Fake prediction section
     st.markdown("### 🧠 Decoded Word:")
-    st.markdown("### 🍎 apple")
+    st.markdown("### scooter")
     
     # Add fake waveform visualization
     st.markdown("### 📈 Simulated EEG Waveform")
     time_points = 1000
-    channels = 39
+    channels = 4
     fake_data = np.random.uniform(-1, 1, size=(channels, time_points))
 
     fig, ax = plt.subplots(figsize=(12, 6))
