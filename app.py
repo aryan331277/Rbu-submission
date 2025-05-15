@@ -1,70 +1,79 @@
 import streamlit as st
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+import os
 
-# Page configuration
-st.set_page_config(
-    page_title="EDF Predictor",
-    page_icon="🍏",
-    layout="centered",
-    initial_sidebar_state="collapsed"
-)
+# --- PAGE CONFIG ---
+st.set_page_config(page_title="🧠 EEG-to-Word Decoder (Demo)", layout="wide")
 
-# Hide Streamlit menu and footer for a cleaner look
-st.markdown(
-    """
-    <style>
-    #MainMenu {visibility: hidden;}
-    footer {visibility: hidden;}
-    .edf-card {
-        padding: 1.5rem;
-        border-radius: 1rem;
-        background: #f7f9fc;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-    }
-    .edf-button {
-        margin-top: 1rem;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+# --- HEADER ---
+st.title("🧠 EEG-to-Word Decoder – v1 Demo")
+st.markdown("Upload any `.edf` or `.npy` EEG-like file and watch the AI decode silent thoughts.")
+st.markdown("_Model not integrated yet – all files return: `apple`_")
 
-# App Header
-st.markdown(
-    "<div class='edf-card'>"
-    "<h1 style='text-align: center;'>🍏 EDF File Predictor</h1>"
-    "<p style='text-align: center; color: #555;'>Upload any file and see the magic happen!</p>"
-    "</div>",
-    unsafe_allow_html=True
-)
+# --- SIDEBAR INFO ---
+with st.sidebar:
+    st.header("🛠 About This Project")
+    st.markdown("""
+    - Built by Aryan  
+    - Part of Project 16/52  
+    - Solo, first-year, self-taught  
+    - Coming soon: Real CNN-based decoding from raw EEG signals  
+    """)
+    st.image("assets/brainwave.png", use_column_width=True)
+    st.caption("Fake visualization shown for demo purposes.")
 
-# File uploader accepting any type
-uploaded_file = st.file_uploader(
-    label="Choose a file (any type)",
-    type=None,  # Accept any file type
-    help="Supported: EDF files and more"
-)
+# --- FILE UPLOADER ---
+uploaded_file = st.file_uploader("📁 Upload an EEG file (.edf / .npy / anything)", type=["edf", "npy", "csv", "npy"])
 
-# When a file is uploaded
-if uploaded_file:
-    ext = uploaded_file.name.lower().split('.')[-1]
-    if ext == 'edf':
-        st.success("✅ EDF file accepted!")
-    else:
-        st.info(f"📂 File '{uploaded_file.name}' uploaded (not EDF).")
+if uploaded_file is not None:
+    st.success(f"✅ '{uploaded_file.name}' uploaded successfully.", icon="🧠")
 
-    # Centered button for prediction
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        predict = st.button("🎯 Predict Word", key="predict", help="Click to get your prediction")
+    # Show file details
+    st.subheader("📄 File Details")
+    st.write(f"**Type:** {os.path.splitext(uploaded_file.name)[-1]}")
+    st.write(f"**Size:** {round(len(uploaded_file.getvalue()) / 1024, 2)} KB")
+    
+    # Fake prediction section
+    st.markdown("### 🧠 Decoded Word:")
+    st.markdown("### 🍎 apple")
+    
+    # Add fake waveform visualization
+    st.markdown("### 📈 Simulated EEG Waveform")
+    time_points = 1000
+    channels = 39
+    fake_data = np.random.uniform(-1, 1, size=(channels, time_points))
 
-    # Display prediction
-    if predict:
-        # Dummy prediction logic
-        predicted_word = "apple"
-        st.balloons()
-        st.markdown(
-            f"<div class='edf-card' style='background: #e6ffed;'>"
-            f"<h2 style='text-align: center; color: #2e7d32;'>Prediction: <strong>{predicted_word}</strong></h2>"
-            f"</div>",
-            unsafe_allow_html=True
-        )
+    fig, ax = plt.subplots(figsize=(12, 6))
+    for i in range(channels):
+        ax.plot(fake_data[i] + i * 2, lw=1)
+
+    ax.set_title("Simulated EEG Channels (All Files Return 'apple')")
+    ax.set_xlabel("Time Points")
+    ax.set_yticks([])
+    ax.set_yticklabels([])
+    ax.set_ylabel("Channels")
+    ax.grid(True)
+    st.pyplot(fig)
+
+    # Confidence bar (fake)
+    st.markdown("### 🔍 Confidence Score")
+    st.progress(0.85, text="85% confidence this is 'apple'")
+
+    # Download fake result button
+    decoded_result = "Decoded Word: apple\nConfidence: 85%\nStatus: Fake Model (Coming Soon™)"
+    st.download_button(
+        label="💾 Download Prediction",
+        data=decoded_result,
+        file_name="predicted_word.txt",
+        mime="text/plain"
+    )
+
+else:
+    st.info("📂 Please upload an EEG-like file to begin decoding.")
+
+# --- FOOTER ---
+st.markdown("---")
+st.markdown("#### 🔬 Built by Aryan · First-Year Legend · Project 16/52 · Demo v1")
+st.markdown("Next version will decode real imagined words from brainwaves.")
