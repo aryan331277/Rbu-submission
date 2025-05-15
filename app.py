@@ -21,8 +21,14 @@ with st.sidebar:
     - Solo, first-year, self-taught  
     - Coming soon: Real CNN-based decoding from raw EEG signals  
     """)
-    st.image("assets/brainwave.png", use_column_width=True)
-    st.caption("Fake visualization shown for demo purposes.")
+    image_file = st.file_uploader("🧠 Upload a brainwave image (optional)", type=["png", "jpg", "jpeg"])
+
+    if image_file is not None:
+        st.image(image_file, use_column_width=True)
+        st.caption("User-provided brainwave image.")
+    else:
+        st.info("You can optionally upload a brainwave image to show in the sidebar.")
+        st.caption("Fake visualization shown for demo purposes.")
 
 # --- FILE UPLOADER ---
 uploaded_file = st.file_uploader("📁 Upload an EEG file (.edf / .npy / anything)", type=["edf", "npy", "csv", "npy"])
