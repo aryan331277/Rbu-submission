@@ -51,7 +51,7 @@ if uploaded_file is not None:
     for i in range(channels):
         ax.plot(fake_data[i] + i * 2, lw=1)
 
-    ax.set_title("Simulated EEG Channels (All Files Return 'apple')")
+    ax.set_title("Simulated EEG Channels (All Files Return 'scooter')")
     ax.set_xlabel("Time Points")
     ax.set_yticks([])
     ax.set_yticklabels([])
