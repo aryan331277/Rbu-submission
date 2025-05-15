@@ -31,7 +31,7 @@ with st.sidebar:
 uploaded_file = st.file_uploader("Upload an EEG file (.edf / .npy / anything)", type=["edf", "npy", "csv", "npy"])
 
 if uploaded_file is not None:
-    st.success(f"✅ '1.edf' uploaded successfully.", icon="")
+    #st.success(f"✅ '1.edf' uploaded successfully.", icon="")
 
     # Show file details
     st.subheader("File Details")
